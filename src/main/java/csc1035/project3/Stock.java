@@ -1,5 +1,5 @@
 package csc1035.project3;
-import sun.jvm.hotspot.debugger.SymbolLookup;
+
 
 import javax.persistence.*;
 @Entity
@@ -20,13 +20,25 @@ public class Stock {
     private Boolean perishable;
 
     @Column(name = "cost")
-    private Long cost;
+    private int cost;
 
     @Column(name = "stock")
-    private Long stock;
+    private int stock;
 
     @Column(name = "sellPrice")
-    private Long sellPrice;
+    private int sellPrice;
+
+
+    public Stock(int id, String stockName, String category, Boolean perishable, int cost, int stock, int sellPrice) {
+        this.id = id;
+        this.stockName = stockName;
+        this.category = category;
+        this.perishable = perishable;
+        this.cost = cost;
+        this.stock = stock;
+        this.sellPrice = sellPrice;
+    }
+
 
     public void setId(int id) {
         this.id = id;
@@ -60,27 +72,27 @@ public class Stock {
         return perishable;
     }
 
-    public Long getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(Long cost) {
+    public void  setCost(int cost) {
         this.cost = cost;
     }
 
-    public Long getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
-    public Long getSellPrice() {
+    public int getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(Long sellPrice) {
+    public void setSellPrice(int sellPrice) {
         this.sellPrice = sellPrice;
     }
 }
