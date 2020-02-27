@@ -9,7 +9,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://cs-db.ncl.ac.uk/csc1035_team23</property>
         <property name="hibernate.connection.username">csc1035_team23</property>
         <property name="hibernate.connection.password">one?Sea:7Pan</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hbm2ddl.auto">update </property>
