@@ -2,30 +2,30 @@ package csc1035.project3;
 
 
 import javax.persistence.*;
-@Entity
-@Table(name = "STOCK")
+@Entity(name = "Stock")
 public class Stock {
     //id,name,category,perishable,cost,stock,sell_price
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private int id;
 
-    @Column(name = "stockName")
+    @Column
     private String stockName;
 
-    @Column(name = "category")
+    @Column
     private String category;
 
-    @Column(name = "perishable")
+    @Column
     private Boolean perishable;
 
-    @Column(name = "cost")
+    @Column
     private int cost;
 
-    @Column(name = "stock")
+    @Column
     private int stock;
 
-    @Column(name = "sellPrice")
+    @Column
     private int sellPrice;
 
 
