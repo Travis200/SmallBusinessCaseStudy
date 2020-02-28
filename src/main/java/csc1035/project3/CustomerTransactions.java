@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import javax.management.Query;
 
 public class CustomerTransactions {
+    public static void main(String[] args) {transaction();}
     public static void transaction() {
         List<String> items = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -20,6 +21,12 @@ public class CustomerTransactions {
         }
         while (!item.matches("false"));
         {
+            try{
+                session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                Stock stock = (session.get(Stock.class, items.get(0)));
+                System.out.println(stock.getSellPrice());
+            }catch(HibernateException e){}
 
         }
     }
