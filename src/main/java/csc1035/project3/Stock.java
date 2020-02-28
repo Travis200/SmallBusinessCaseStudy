@@ -39,6 +39,10 @@ public class Stock {
         this.sellPrice = sellPrice;
     }
 
+    public Stock(){
+
+    }
+
 
     public void setId(int id) {
         this.id = id;
