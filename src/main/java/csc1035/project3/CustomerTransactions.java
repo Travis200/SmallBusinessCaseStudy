@@ -27,6 +27,8 @@ public class CustomerTransactions {
                 Stock stock = (session.get(Stock.class, items.get(0)));
                 System.out.println(stock.getSellPrice());
             }catch(HibernateException e){}
+            finally {
+                session.close();}
 
         }
     }
