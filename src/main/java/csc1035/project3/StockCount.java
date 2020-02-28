@@ -13,8 +13,8 @@ public class StockCount {
             List<Stock> stocks = session.createQuery("FROM Stock").list();
             for (Iterator<Stock> iterator = stocks.iterator(); iterator.hasNext();){
                 Stock stock = iterator.next();
-                System.out.print("Name: " + stock.getStockName());
-                System.out.print("Quantity: " + stock.getStock());
+                System.out.println("Name: " + stock.getStockName());
+                System.out.println("Quantity: " + stock.getStock());
 
             }
             session.getTransaction().commit();
