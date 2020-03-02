@@ -15,7 +15,6 @@ public class CustomerTransactions {
         do {
             System.out.println("What item would you like to add to the transaction or type false to end it");
             item = scanner.nextLine();
-            System.out.println("Added item to transaction");
             items.add(item);
 
         }
@@ -23,8 +22,10 @@ public class CustomerTransactions {
         {
             try{
                 session = HibernateUtil.getSessionFactory().openSession();
+                System.out.println("Added item to transaction");
                 session.beginTransaction();
-                Stock stock = (session.get(Stock.class, items.get(0)));
+                Stock stock = (session.get(Stock.class, 3));
+                System.out.println(stock);
                 System.out.println(stock.getSellPrice());
             }catch(HibernateException e){}
             finally {
