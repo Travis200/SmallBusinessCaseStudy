@@ -3,7 +3,7 @@ import org.hibernate.Session;
 public class testMain {
     public static void main(String[] args) {
 
-        Stock s1 = new Stock(01,"action man","toys",true,10,100, 15);
+        Stock s1 = new Stock(01,"watch","toys",true,10,100, 15);
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(s1);
