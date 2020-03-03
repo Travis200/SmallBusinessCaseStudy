@@ -1,5 +1,9 @@
 import csc1035.project3.StockCount;
+
 import java.util.Scanner;
+
+import static csc1035.project3.UpdateStock.updateStockObj;
+
 public class CommandLineInterface {
     public static CommandLineInterface interfaceObj = new CommandLineInterface();
     public void runCLI() {
@@ -26,6 +30,7 @@ public class CommandLineInterface {
                         break;
                     case "3":
                         System.out.println("Update stock:");
+                        updateStockObj.runUpdateStockCLI();
                         break;
                     case "4":
                         valid = false;
