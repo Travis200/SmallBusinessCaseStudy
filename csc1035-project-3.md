@@ -173,7 +173,7 @@ You should submit to NESS a zip file containing the following:
 - Your Word/PDF documentation with the NUCode URL of your last commit
   ("HEAD") to NESS (please ensure that the URL includes a Git hash)
 - Any test data needed to run your project. **HINT**: ensure to use relative
-  file paths in your code, not absolute ones
+  file paths in your code, not absolute ones.
 
 
 [1]: https://portfolio.ncl.ac.uk/help/reflection/
