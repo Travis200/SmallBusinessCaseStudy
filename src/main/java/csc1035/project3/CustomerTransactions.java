@@ -18,6 +18,8 @@ public class CustomerTransactions {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Scanner scanner = new Scanner(System.in);
         String item;
+        List<String> itemNames = new ArrayList<>();
+        List<Integer> itemPrices = new ArrayList<>();
         int itemcode = 3;
         do {
             System.out.println("What item would you like to add to the transaction or type false to end it");
@@ -28,30 +30,34 @@ public class CustomerTransactions {
         while (!item.matches("false"));
         {
             try{
-                for(int i=0;i<items.size();i++)
-                session = HibernateUtil.getSessionFactory().openSession();
-                System.out.println("Added item to transaction");
-                session.beginTransaction();
-                Stock stock = (session.get(Stock.class, itemcode));
-                Query q = session.createQuery("select o from Stock o where stockName =:value");
-                q.setParameter("value", "ring");
-                session.getTransaction().commit();
-                System.out.println(q);
-                for (Object i : q.getResultList()) {
-                    Stock tmp = (Stock) i;
-                    System.out.println(tmp.getStockName());
-                    
+                for(int i=0;i<items.size()-1;i++) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    System.out.println("Added item to transaction");
+                    session.beginTransaction();
+                    Query q = session.createQuery("select o from Stock o where stockName =:value");
+                    q.setParameter("value", items.get(i));
+                    session.getTransaction().commit();
+                    for (Object j : q.getResultList()) {
+                        session = HibernateUtil.getSessionFactory().openSession();
+                        session.beginTransaction();
+                        Stock tmp = (Stock) j;
+                        System.out.println(tmp.getStockName());
+                        tmp.setStock(tmp.getStock()-1);
+                        System.out.println(tmp.getStock());
+                        session.update(tmp);
+                        session.getTransaction().commit();
+                        System.out.println(tmp.getCost());
+                        itemNames.add(tmp.getStockName());
+                        itemPrices.add(tmp.getSellPrice());
+
+                    }
                 }
-                //System.out.println(stock.getSellPrice());
-                //stock.setStock(stock.getStock()-1);
-                //System.out.println(stock.getStock());
-                //session.update(stock);
-                //session.save(stock);
-                //session.getTransaction().commit();
+
             }catch(HibernateException e){}
             finally {
                 session.close();}
 
         }
+        //receipt(itemNames, itemPrices);
     }
 }
