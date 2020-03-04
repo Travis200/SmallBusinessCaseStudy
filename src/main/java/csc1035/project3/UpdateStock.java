@@ -1,6 +1,8 @@
 package csc1035.project3;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UpdateStock {
@@ -9,19 +11,21 @@ public class UpdateStock {
 //    public static int updateValue;
 
     public void runUpdateStockCLI() {
-        Scanner scannerObj = new Scanner(System.in);
         System.out.println("Please select one of the following options:");
         System.out.println("Option 1: Overwrite existing stock number");
         System.out.println("Option 2: Add new entry");
         System.out.println("Option 3: Exit");
+
         boolean valid = true;
         while (valid) {
-            System.out.println("Please input option 1, 2, 3");
-            String userChoice1 = scannerObj.nextLine();
-            if (!((userChoice1.equals("1")) || (userChoice1.equals("2")) || (userChoice1.equals("3")))) {
+            System.out.println("Please input option 1, 2, or 3");
+            Scanner scannerObj = new Scanner(System.in);
+            String userChoice = scannerObj.nextLine();
+            if (!((userChoice.equals("1")) || (userChoice.equals("2")) || (userChoice.equals("3")))) {
                 System.out.println("Incorrect input: Please Input 1, 2 or 3");
             }
-            else { switch (userChoice1) {
+            //userChoice1 = scannerObj.nextLine();
+            else { switch (userChoice) {
                 case "1":
                     System.out.println("Overwrite existing stock number");
                     System.out.println("Please enter the the name of the product you would like to update: ");
@@ -100,7 +104,7 @@ public class UpdateStock {
 //            e.printStackTrace();
 //        }
         //finally {
-        session.close();
+        //session.close();
         //}
     }
 
