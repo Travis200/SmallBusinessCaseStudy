@@ -12,7 +12,7 @@ public class UpdateStock {
         Scanner scannerObj = new Scanner(System.in);
         System.out.println("Please select one of the following options:");
         System.out.println("Option 1: Overwrite existing stock number");
-        System.out.println("Option 2: Add/subtract from existing stock");
+        System.out.println("Option 2: Add new entry");
         System.out.println("Option 3: Exit");
         boolean valid = true;
         while (valid) {
@@ -31,7 +31,32 @@ public class UpdateStock {
                     updateStock(productName, updateValue);
                     break;
                 case "2":
-                    System.out.println("Add/subtract from existing stock");
+                    System.out.println("Add new entry");
+                    Stock newStock = new Stock();
+                    System.out.println("Please enter the the name of the product: ");
+                    String userStockName = scannerObj.nextLine();
+                    System.out.println("Please enter the the category of the product: ");
+                    String userStockCategory = scannerObj.nextLine();
+                    System.out.println("Is the product perishable: ");
+                    boolean userStockPerishable = scannerObj.nextBoolean();
+                    System.out.println("What is the cost of the product: ");
+                    int userStockCost = scannerObj.nextInt();
+                    System.out.println("What is the stock of the product: ");
+                    int userStockNum = scannerObj.nextInt();
+                    System.out.println("What is the sell price of the product: ");
+                    int userStockSellPrice = scannerObj.nextInt();
+                    newStock.setStockName(userStockName);
+                    newStock.setcategory(userStockCategory);
+                    newStock.setperishable(userStockPerishable);
+                    newStock.setCost(userStockCost);
+                    newStock.setStock(userStockNum);
+                    newStock.setSellPrice(userStockSellPrice);
+
+                    Session session = HibernateUtil.getSessionFactory().openSession();
+                    session.beginTransaction();
+                    session.save(newStock);
+                    session.getTransaction().commit();
+                    session.close();
                     break;
                 case "3":
                     valid = false;
@@ -89,6 +114,7 @@ public class UpdateStock {
 
 //
     public static void main(String[] args) {
+        updateStockObj.runUpdateStockCLI();
 //        updateStockObj.updateStock("action man", 200);
 
         //        updateStockObj.updateStock();
