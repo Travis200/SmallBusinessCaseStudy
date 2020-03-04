@@ -56,6 +56,6 @@ public class CustomerTransactions {
                 session.close();}
 
         }
-        Receipt(itemNames, itemPrices);
+        Receipt.AsciiTable(itemNames, itemPrices);
     }
 }
