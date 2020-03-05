@@ -11,9 +11,6 @@ import java.util.Scanner;
 //import javax.management.Query;
 
 public class CustomerTransactions {
-    public static void main(String[] args) {
-        transaction();
-    }
 
     public static void transaction() {
         List<String> items = new ArrayList<>();
@@ -66,8 +63,9 @@ public class CustomerTransactions {
         }
         while (!item.matches("false"));
         {
-
-            Receipt.AsciiTable(itemNames, itemPrices);
+            if(itemNames.size()>0) {
+                Receipt.AsciiTable(itemNames, itemPrices);
+            }
         }
     }
 }
