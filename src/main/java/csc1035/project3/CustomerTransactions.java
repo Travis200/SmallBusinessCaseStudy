@@ -47,6 +47,7 @@ public class CustomerTransactions {
                         System.out.println(tmp.getCost());
                         itemNames.add(tmp.getStockName());
                         itemPrices.add(tmp.getSellPrice());
+                        break;
 
                     }
                 }
