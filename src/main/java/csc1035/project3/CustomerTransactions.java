@@ -6,7 +6,6 @@ import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
 
 //import javax.management.Query;
@@ -20,7 +19,6 @@ public class CustomerTransactions {
         String item;
         List<String> itemNames = new ArrayList<>();
         List<Integer> itemPrices = new ArrayList<>();
-        int itemcode = 3;
         do {
             System.out.println("What item would you like to add to the transaction or type false to end it");
             item = scanner.nextLine();
@@ -49,6 +47,7 @@ public class CustomerTransactions {
                         System.out.println(tmp.getCost());
                         itemNames.add(tmp.getStockName());
                         itemPrices.add(tmp.getSellPrice());
+                        break;
 
                     }
                 }
@@ -58,6 +57,6 @@ public class CustomerTransactions {
                 session.close();}
 
         }
-        //receipt(itemNames, itemPrices);
+        Receipt.AsciiTable(itemNames, itemPrices);
     }
 }
