@@ -8,13 +8,18 @@ import java.util.Scanner;
 public class UpdateStock {
     public static UpdateStock updateStockObj = new UpdateStock();
 
+    /**
+     * Runs command line style user interface where the user chooses how they would like to update the database.
+     * The user has a choice to either overwrite an existing stock number from an item already in the database,
+     * add a completely new item, or delete an item from the database.
+     * Depending on which choice the user chooses the correlating method will be run.
+     */
     public void runUpdateStockCLI() {
         System.out.println("Please select one of the following options:");
         System.out.println("Option 1: Overwrite existing stock number");
         System.out.println("Option 2: Add new entry");
         System.out.println("Option 3: Delete entry");
         System.out.println("Option 4: Exit");
-
         boolean valid = true;
         while (valid) {
             System.out.println("Please input option 1, 2, 3 or 4");
@@ -50,7 +55,11 @@ public class UpdateStock {
         }
     }
 
-
+    /**
+     * This updates the stock value of an item in the database.
+     * @param productName This is the name of the product which stock value will be changed
+     * @param updateValue This is the value which will be used to overwrite the current stock value.
+     */
     public void updateStockValue(String productName, int updateValue) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -69,6 +78,9 @@ public class UpdateStock {
         }
     }
 
+    /**
+     * This creates a item in the database based on what the user inputs.
+     */
     public void createNewStockEntry() {
         Scanner scannerObj = new Scanner(System.in);
         Stock newStock = new Stock();
@@ -98,6 +110,10 @@ public class UpdateStock {
         session.close();
     }
 
+    /**
+     * This deletes an item from the database using the product name.
+     * @param productName The name of the product that will be deleted.
+     */
     public void deleteStockEntry(String productName) {
         Scanner scannerObj = new Scanner(System.in);
         Session session = HibernateUtil.getSessionFactory().openSession();

@@ -6,6 +6,7 @@ import static csc1035.project3.UpdateStock.updateStockObj;
 
 public class CommandLineInterface {
     public static CommandLineInterface interfaceObj = new CommandLineInterface();
+
     public void runCLI() {
         Scanner scannerObj = new Scanner(System.in);
         System.out.println("Please select one of the following options:");
