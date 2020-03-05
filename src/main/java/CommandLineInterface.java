@@ -26,6 +26,8 @@ public class CommandLineInterface {
                         break;
                     case "3":
                         System.out.println("Update stock:");
+                        //input stock id
+                        //input new quantity
                         break;
                     case "4":
                         valid = false;
