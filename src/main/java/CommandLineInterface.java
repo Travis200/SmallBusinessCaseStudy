@@ -1,6 +1,8 @@
 import csc1035.project3.StockCount;
+import csc1035.project3.CustomerTransactions;
 import java.util.Scanner;
 public class CommandLineInterface {
+    /** This is the command line interface shown to the user.*/
     public static CommandLineInterface interfaceObj = new CommandLineInterface();
     public void runCLI() {
         Scanner scannerObj = new Scanner(System.in);
@@ -23,6 +25,7 @@ public class CommandLineInterface {
                         break;
                     case "2":
                         System.out.println("Customer Transaction:");
+                        CustomerTransactions.transaction();
                         break;
                     case "3":
                         System.out.println("Update stock:");

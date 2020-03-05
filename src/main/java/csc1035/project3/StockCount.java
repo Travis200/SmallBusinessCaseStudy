@@ -1,9 +1,9 @@
 package csc1035.project3;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-
 import java.util.*;
 public class StockCount {
+    /**This shows the list of what the datebase includes and the price of each of them.*/
     public static void count() {
        System.out.println("The stock count is shown below:");
         Session session;
