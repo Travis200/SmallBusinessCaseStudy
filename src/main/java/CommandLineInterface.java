@@ -1,3 +1,4 @@
+import csc1035.project3.CustomerTransactions;
 import csc1035.project3.StockCount;
 import java.util.Scanner;
 public class CommandLineInterface {
@@ -23,6 +24,7 @@ public class CommandLineInterface {
                         break;
                     case "2":
                         System.out.println("Customer Transaction:");
+                        CustomerTransactions.transaction();
                         break;
                     case "3":
                         System.out.println("Update stock:");

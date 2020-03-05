@@ -11,9 +11,6 @@ import java.util.Scanner;
 //import javax.management.Query;
 
 public class CustomerTransactions {
-    public static void main(String[] args) {
-        transaction();
-    }
 
     public static void transaction() {
         List<String> items = new ArrayList<>();
