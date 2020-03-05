@@ -2,9 +2,13 @@ import csc1035.project3.CustomerTransactions;
 import csc1035.project3.StockCount;
 import csc1035.project3.CustomerTransactions;
 import java.util.Scanner;
+
+import static csc1035.project3.UpdateStock.updateStockObj;
+
 public class CommandLineInterface {
     /** This is the command line interface shown to the user.*/
     public static CommandLineInterface interfaceObj = new CommandLineInterface();
+
     public void runCLI() {
         Scanner scannerObj = new Scanner(System.in);
         boolean valid = true;
@@ -30,6 +34,7 @@ public class CommandLineInterface {
                         break;
                     case "3":
                         System.out.println("Update stock:");
+                        updateStockObj.runUpdateStockCLI();
                         break;
                     case "4":
                         valid = false;
