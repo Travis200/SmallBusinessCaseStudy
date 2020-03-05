@@ -63,8 +63,9 @@ public class CustomerTransactions {
         }
         while (!item.matches("false"));
         {
-
-            Receipt.AsciiTable(itemNames, itemPrices);
+            if(itemNames.size()>0) {
+                Receipt.AsciiTable(itemNames, itemPrices);
+            }
         }
     }
 }

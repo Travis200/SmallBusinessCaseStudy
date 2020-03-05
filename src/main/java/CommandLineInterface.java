@@ -5,13 +5,13 @@ public class CommandLineInterface {
     public static CommandLineInterface interfaceObj = new CommandLineInterface();
     public void runCLI() {
         Scanner scannerObj = new Scanner(System.in);
-        System.out.println("Please select one of the following options:");
-        System.out.println("Option 1: Retrieve count of available stock");
-        System.out.println("Option 2: Customer Transaction");
-        System.out.println("Option 3: Update Stock");
-        System.out.println("Option 4: Exit");
         boolean valid = true;
         while (valid) {
+            System.out.println("Please select one of the following options:");
+            System.out.println("Option 1: Retrieve count of available stock");
+            System.out.println("Option 2: Customer Transaction");
+            System.out.println("Option 3: Update Stock");
+            System.out.println("Option 4: Exit");
             System.out.println("Please input option 1, 2, 3 or 4");
             String userChoice1 = scannerObj.nextLine();
             if (!((userChoice1.equals("1")) || (userChoice1.equals("2")) || (userChoice1.equals("3")) || (userChoice1.equals("4")))) {
