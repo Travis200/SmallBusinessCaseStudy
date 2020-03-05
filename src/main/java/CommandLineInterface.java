@@ -17,7 +17,7 @@ public class CommandLineInterface {
             System.out.println("Please input option 1, 2, 3 or 4");
             String userChoice1 = scannerObj.nextLine();
             if (!((userChoice1.equals("1")) || (userChoice1.equals("2")) || (userChoice1.equals("3")) || (userChoice1.equals("4")))) {
-                System.out.println("Incorrect input: Please Input 1, 2 or 3");
+                System.out.println("Incorrect input: Please Input 1, 2, 3 or 4");
             }
             else { switch (userChoice1) {
                     case "1":
