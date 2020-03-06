@@ -24,7 +24,7 @@ public class CustomerTransactions {
         String item = "";
         int quantity = 1;
         List<String> itemNames = new ArrayList<>();
-        List<Double> itemPrices = new ArrayList<>();
+        List<Integer> itemPrices = new ArrayList<>();
         do {
             System.out.println("What item would you like to add to the transaction followed by the quantity with a space in between");
             System.out.println("or type false to end it");
@@ -40,50 +40,39 @@ public class CustomerTransactions {
             scanner2.close();}
 
 
-            try {
-                for (int i = 0; i < quantity; i++) {
+        }
+        while (!item.matches("false"));
+        {
+            try{
+                for(int i=0;i<items.size()-1;i++) {
                     session = HibernateUtil.getSessionFactory().openSession();
+                    System.out.println("Added item to transaction");
                     session.beginTransaction();
                     Query q = session.createQuery("select o from Stock o where stockName =:value");
-                    q.setParameter("value", item);
+                    q.setParameter("value", items.get(i));
                     session.getTransaction().commit();
-                    if (q.getResultList().size()==0){
-                        System.out.println("Item does not exist");
-                        break;
-                    }
                     for (Object j : q.getResultList()) {
                         session = HibernateUtil.getSessionFactory().openSession();
                         session.beginTransaction();
                         Stock tmp = (Stock) j;
-
-                        if (tmp.getStock() <= 0) {
-                            System.out.println();
-                            System.out.println("Out of Stock : " + tmp.getStockName());
-                            break;
-                        } else if(tmp.getStock()>0) {
-                            tmp.setStock(tmp.getStock() - 1);
-                            session.update(tmp);
-                            session.getTransaction().commit();
-                            itemNames.add(tmp.getStockName());
-                            itemPrices.add(tmp.getSellPrice());
-                            System.out.println("Item added to transaction");
-                            break;
-                        }
+                        System.out.println(tmp.getStockName());
+                        tmp.setStock(tmp.getStock()-1);
+                        System.out.println(tmp.getStock());
+                        session.update(tmp);
+                        session.getTransaction().commit();
+                        System.out.println(tmp.getCost());
+                        itemNames.add(tmp.getStockName());
+                        itemPrices.add(tmp.getSellPrice());
+                        break;
 
                     }
                 }
 
-            } catch (HibernateException e) {
-            } finally {
-                session.close();
-            }
+            }catch(HibernateException e){}
+            finally {
+                session.close();}
 
         }
-        while (!item.matches("false"));
-        {
-            if(itemNames.size()>0) {
-                Receipt.AsciiTable(itemNames, itemPrices);
-            }
-        }
+        Receipt.AsciiTable(itemNames, itemPrices);
     }
 }

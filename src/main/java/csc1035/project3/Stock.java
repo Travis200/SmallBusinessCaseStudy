@@ -20,16 +20,16 @@ public class Stock {
     private Boolean perishable;
 
     @Column
-    private double cost;
+    private int cost;
 
     @Column
     private int stock;
 
     @Column
-    private double sellPrice;
+    private int sellPrice;
 
 
-    public Stock(int id, String stockName, String category, Boolean perishable, double cost, int stock, double sellPrice) {
+    public Stock(int id, String stockName, String category, Boolean perishable, int cost, int stock, int sellPrice) {
         this.id = id;
         this.stockName = stockName;
         this.category = category;
@@ -76,11 +76,11 @@ public class Stock {
         return perishable;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void  setCost(double cost) {
+    public void  setCost(int cost) {
         this.cost = cost;
     }
 
@@ -92,11 +92,11 @@ public class Stock {
         this.stock = stock;
     }
 
-    public double getSellPrice() {
+    public int getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(double sellPrice) {
+    public void setSellPrice(int sellPrice) {
         this.sellPrice = sellPrice;
     }
 }
