@@ -3,7 +3,7 @@ import org.hibernate.*;
 import java.util.*;
 public class CRUD {
     /** This allows you to add items to the database with its attributes.*/
-    public static void create(int stock, String category, int cost, int sellprice, boolean perishable, String name){
+    public static void create(int stock, String category, double cost, double sellprice, boolean perishable, String name){
 
         Stock s1 = new Stock();
         s1.setStock(stock);
