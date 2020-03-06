@@ -29,7 +29,7 @@ public class Stock {
     private double sellPrice;
 
 
-    public Stock(int id, String stockName, String category, Boolean perishable, int cost, int stock, int sellPrice) {
+    public Stock(int id, String stockName, String category, Boolean perishable, double cost, int stock, double sellPrice) {
         this.id = id;
         this.stockName = stockName;
         this.category = category;
