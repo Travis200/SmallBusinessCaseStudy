@@ -11,13 +11,18 @@ import java.util.Scanner;
 //import javax.management.Query;
 
 public class CustomerTransactions {
-
+/**
+*Takes a user input of a string and an int with a space in between for example
+ * ring 3
+ * it will add 3 rings to the transaction
+ * or you can type false to stop adding to the transaction
+ * */
     public static void transaction() {
         List<String> items = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Scanner scanner = new Scanner(System.in);
-        String item;
-        int quantity;
+        String item = "";
+        int quantity = 1;
         List<String> itemNames = new ArrayList<>();
         List<Double> itemPrices = new ArrayList<>();
         do {
@@ -25,12 +30,14 @@ public class CustomerTransactions {
             System.out.println("or type false to end it");
             String input1 = scanner.nextLine();
             Scanner scanner2 = new Scanner(input1).useDelimiter("\\s");
+            if (scanner2.hasNext()){
             item = (scanner2.next());
             if (item.matches("false")){
                 break;
             }
-            quantity = (scanner2.nextInt());
-            scanner2.close();
+            if (scanner2.hasNext()){
+            quantity = (scanner2.nextInt());}
+            scanner2.close();}
 
 
             try {
