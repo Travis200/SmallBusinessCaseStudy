@@ -28,23 +28,20 @@ public class Receipt {
         System.out.println("the total cost is " + total);
         System.out.println();
 
-        //Asking how much the costumer paid
-        Double amountPaid;
+        //Asking how much the costumer paid and making sure that it isn't less than what is owed
+        Double amountPaid = 0.0;
         do {
             Scanner input = new Scanner(System.in);
             System.out.print("Please enter how much the costumer paid ");
             System.out.println("(Please ensure its more than or equal to " + total + "): ");
-            amountPaid = input.nextDouble();
+            if (input.hasNextDouble()){
+                amountPaid = input.nextDouble();}
         }while (amountPaid < total);
 
-            //Checking that the costumer didn't pay less than what is owed
-
-
-
-            //Formatting ASCII table so the addition of variables doesn't hinder the format
+        //Formatting ASCII table so the addition of variables doesn't hinder the format
             String leftAlignFormat = "|  %-33s    %-4s |%n";
             String leftAlignFormatTotal = "|  Total Cost:                          %-4s |%n";
-            String leftAlignFormatAmountPaid = "|  Amount Paid:                         %-4s |%n";
+            String leftAlignFormatAmountPaid = "|  Amount Paid:                         %-4s|%n";
             String leftAlignFormatChangeOwed = "|  Change Owed:                         %-4s |%n";
 
             //This is how the start of every receipt will look like
