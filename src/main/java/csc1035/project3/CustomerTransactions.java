@@ -17,13 +17,24 @@ public class CustomerTransactions {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Scanner scanner = new Scanner(System.in);
         String item;
+        int quantity;
         List<String> itemNames = new ArrayList<>();
         List<Integer> itemPrices = new ArrayList<>();
         do {
-            System.out.println("What item would you like to add to the transaction or type false to end it");
-            item = scanner.nextLine();
+            System.out.println("What item would you like to add to the transaction followed by the quantity with a space in between");
+            System.out.println("or type false to end it");
+            String input1 = scanner.nextLine();
+            Scanner scanner2 = new Scanner(input1).useDelimiter("\\s");
+            item = (scanner2.next());
+            if (item.matches("false")){
+                break;
+            }
+            quantity = (scanner2.nextInt());
+            scanner2.close();
+
+
             try {
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < quantity; i++) {
                     session = HibernateUtil.getSessionFactory().openSession();
                     session.beginTransaction();
                     Query q = session.createQuery("select o from Stock o where stockName =:value");
