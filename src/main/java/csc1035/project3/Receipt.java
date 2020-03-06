@@ -13,7 +13,7 @@ public class Receipt {
      * @param itemNames
      * @param itemPrices
      */
-    public static void AsciiTable(List<String> itemNames, List<Integer> itemPrices){
+    public static void AsciiTable(List<String> itemNames, List<Double> itemPrices){
 
         //Formatting ASCII table
         String leftAlignFormat="|  %-33s    %-4s |%n";

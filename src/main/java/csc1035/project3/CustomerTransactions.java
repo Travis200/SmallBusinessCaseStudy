@@ -19,7 +19,7 @@ public class CustomerTransactions {
         String item;
         int quantity;
         List<String> itemNames = new ArrayList<>();
-        List<Integer> itemPrices = new ArrayList<>();
+        List<Double> itemPrices = new ArrayList<>();
         do {
             System.out.println("What item would you like to add to the transaction followed by the quantity with a space in between");
             System.out.println("or type false to end it");
