@@ -5,19 +5,11 @@ import java.util.*;
 public class Receipt {
 
 
-    /**
-     * This method generates a receipt for the costumer after a purchase has happened.
-     * An ASCII table is made in order to structure the receipt.
-     * It then prints the items that are part of the transaction, as well as their price.
-     * Finally, it adds up the prices of the items that were bought and prints the total receipt.
-     * @param itemNames
-     * @param itemPrices
-     */
     public static void AsciiTable(List<String> itemNames, List<Integer> itemPrices){
 
         //Formatting ASCII table
         String leftAlignFormat="|  %-33s    %-4s |%n";
-        String leftAlignFormatTotal="|  Total Cost:                          %-4s |%n";
+        String leftAlignFormatTotal="|                                       %-4s |%n";
         //This is how the start of every receipt will look like
         System.out.format("+--------------------------------------------+%n");
         System.out.format("|                 Cash Receipt               | %n");
@@ -37,7 +29,7 @@ public class Receipt {
         }
 
         System.out.format("+--------------------------------------------+%n");
-        System.out.format("|                                            |%n");;
+        System.out.format("|  Total Cost:                               | %n");
 
         //Looping through the transaction to find the total cost and print it
         int total = 0;
@@ -48,7 +40,6 @@ public class Receipt {
         //After the total cost has been calculated, it prints it out onto the ASCII table in the format of
         //leftAlignFormatTotal to not break the structure of the table.
         System.out.format(leftAlignFormatTotal, total);
-        System.out.format("|                                            |%n");
         System.out.format("+--------------------------------------------+%n");
 
 
@@ -56,7 +47,6 @@ public class Receipt {
         System.out.format("|                                            |%n");
         System.out.format("|                  Thank You                 |%n");
         System.out.format("+--------------------------------------------+%n");
-        System.out.println();
 
         }
 }

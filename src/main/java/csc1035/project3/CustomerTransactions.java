@@ -38,7 +38,7 @@ public class CustomerTransactions {
                         session.beginTransaction();
                         Stock tmp = (Stock) j;
 
-                        if (tmp.getStock() >= 0) {
+                        if (tmp.getStock() == 0) {
                             System.out.println();
                             System.out.println("Out of Stock : " + tmp.getStockName());
                             break;

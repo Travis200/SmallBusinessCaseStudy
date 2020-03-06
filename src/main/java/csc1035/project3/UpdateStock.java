@@ -35,6 +35,10 @@ public class UpdateStock {
                         String productName = scannerObj.nextLine();
                         System.out.println("Please enter the the number of the value you would like to overwrite it with: ");
                         int updateValue = scannerObj.nextInt();
+                        while (updateValue<0) {
+                            System.out.println("Invalid input, please enter a stock number equal to or higher than 0: ");
+                            updateValue = scannerObj.nextInt();
+                        }
                         updateStockValue(productName, updateValue);
                         break;
                     case "2":
@@ -93,6 +97,10 @@ public class UpdateStock {
         System.out.println("What is the cost of the product: ");
         int userStockCost = scannerObj.nextInt();
         System.out.println("What is the stock of the product: ");
+        while (userStockCost<0) {
+            System.out.println("Invalid input, please enter a stock number equal to or higher than 0: ");
+            userStockCost = scannerObj.nextInt();
+        }
         int userStockNum = scannerObj.nextInt();
         System.out.println("What is the sell price of the product: ");
         int userStockSellPrice = scannerObj.nextInt();
@@ -115,7 +123,6 @@ public class UpdateStock {
      * @param productName The name of the product that will be deleted.
      */
     public void deleteStockEntry(String productName) {
-        Scanner scannerObj = new Scanner(System.in);
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query q = session.createQuery("select o from Stock o where stockName =:value");
