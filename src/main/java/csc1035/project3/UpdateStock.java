@@ -94,8 +94,8 @@ public class UpdateStock {
      * This creates a item in the database based on what the user inputs.
      */
     public void createNewStockEntry() {
-        boolean addNewItem = true;
-        while (addNewItem == true) {
+        boolean addNewItemBool = true;
+        while (addNewItemBool == true) {
             Scanner scannerObj = new Scanner(System.in);
             Stock newStock = new Stock();
             System.out.println("Please enter the the name of the product: ");
@@ -107,7 +107,8 @@ public class UpdateStock {
             System.out.println("Please enter the the category of the product: ");
             String userStockCategory = scannerObj.nextLine();
             System.out.println("Is the product perishable: ");
-            boolean userStockPerishable = scannerObj.nextBoolean();
+            String userStockPerishable = scannerObj.nextLine();
+            boolean userStockPerishableBool = stringToBool(userStockPerishable);
             System.out.println("What is the cost of the product: ");
             int userStockCost = scannerObj.nextInt();
             while (userStockCost < 0) {
@@ -126,16 +127,17 @@ public class UpdateStock {
                 System.out.println("Invalid input, please enter a sell price equal to or higher than 0: ");
                 userStockSellPrice = scannerObj.nextInt();
             }
-            boolean addToDatabase = true;
+            boolean addToDatabaseBool = true;
             if (userStockCost > userStockSellPrice) {
                 System.out.println("The cost is higher than the sell price, are you sure you wish to add this item?");
-                System.out.println("true = add to the database anyway, false = dont add to the database");
-                addToDatabase = scannerObj.nextBoolean();
+                System.out.println("Y = add to the database anyway, N = dont add to the database");
+                String addToDatabase = scannerObj.nextLine();
+                addToDatabaseBool = stringToBool(addToDatabase);
             }
-            if (addToDatabase == true) {
+            if (addToDatabaseBool == true) {
                 newStock.setStockName(userStockName);
                 newStock.setcategory(userStockCategory);
-                newStock.setperishable(userStockPerishable);
+                newStock.setperishable(userStockPerishableBool);
                 newStock.setCost(userStockCost);
                 newStock.setStock(userStockNum);
                 newStock.setSellPrice(userStockSellPrice);
@@ -147,8 +149,9 @@ public class UpdateStock {
                 session.close();
 
                 System.out.println("Would you like to add another product to the database?");
-                System.out.println("true = yes, false = no");
-                addNewItem = scannerObj.nextBoolean();
+                System.out.println("Y = yes, N = no");
+                String addNewItem = scannerObj.nextLine();
+                addNewItemBool = stringToBool(addNewItem);
             }
         }
     }
@@ -192,5 +195,19 @@ public class UpdateStock {
                 doesExist = false;
         }
         return doesExist;
+    }
+
+    public boolean stringToBool(String stringToConvert) {
+        stringToConvert.toUpperCase().trim();
+        Scanner scannerObj = new Scanner(System.in);
+        boolean convertedString = false;
+        while(!((stringToConvert.equals("Y")) || (stringToConvert.equals("N")))) {
+            System.out.println("Invalid input, please input Y or N: ");
+            stringToConvert = scannerObj.nextLine().toUpperCase().trim();
+        }
+        if (stringToConvert.equals("Y")){
+            convertedString = true;
+        }
+        return convertedString;
     }
 }
