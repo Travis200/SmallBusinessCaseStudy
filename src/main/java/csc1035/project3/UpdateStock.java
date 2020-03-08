@@ -98,6 +98,7 @@ public class UpdateStock {
      */
     public void createNewStockEntry() {
         boolean addNewItemBool = true;
+//        Will add entries to the database to the DB until the user is finished
         while (addNewItemBool == true) {
             Scanner scannerObj = new Scanner(System.in);
             Stock newStock = new Stock();
@@ -111,7 +112,8 @@ public class UpdateStock {
             System.out.println("Please enter the the category of the product: ");
             String userStockCategory = scannerObj.nextLine().toLowerCase().trim();
             System.out.println("Is the product perishable: ");
-            String userStockPerishable = scannerObj.nextLine().toLowerCase().trim();
+            System.out.println("Y = yes, N = no");
+            String userStockPerishable = scannerObj.nextLine();
             boolean userStockPerishableBool = stringToBool(userStockPerishable);
             System.out.println("What is the cost of the product: ");
             int userStockCost = scannerObj.nextInt();
@@ -156,10 +158,11 @@ public class UpdateStock {
                 session.save(newStock);
                 session.getTransaction().commit();
                 session.close();
-
+//                Asks if the user wants to add another entry and changes the value of addNewIteBool accordingly.
+                Scanner scannerObj2 = new Scanner(System.in);
                 System.out.println("Would you like to add another product to the database?");
                 System.out.println("Y = yes, N = no");
-                String addNewItem = scannerObj.nextLine().toUpperCase().trim();
+                String addNewItem = scannerObj2.nextLine();
                 addNewItemBool = stringToBool(addNewItem);
             }
         }
