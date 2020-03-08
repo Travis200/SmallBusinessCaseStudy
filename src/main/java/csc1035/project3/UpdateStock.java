@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class UpdateStock {
     public static UpdateStock updateStockObj = new UpdateStock();
-
     /**
      * Runs command line style user interface where the user chooses how they would like to update the database.
      * The user has a choice to either overwrite an existing stock number from an item already in the database,
@@ -24,7 +23,7 @@ public class UpdateStock {
             System.out.println("Option 4: Exit");
             System.out.println("Please input option 1, 2, 3 or 4");
             Scanner scannerObj = new Scanner(System.in);
-            String userChoice = scannerObj.nextLine();
+            String userChoice = scannerObj.nextLine().trim();
             if (!((userChoice.equals("1")) || (userChoice.equals("2")) || (userChoice.equals("3")) || (userChoice.equals("4")))) {
                 System.out.println("Incorrect input: Please Input 1, 2, 3 or 4");
             } else {
@@ -32,10 +31,10 @@ public class UpdateStock {
                     case "1":
                         System.out.println("Overwrite existing stock number");
                         System.out.println("Please enter the the name of the product you would like to update: ");
-                        String productName = scannerObj.nextLine();
+                        String productName = scannerObj.nextLine().trim();
                         while (checkItemExists(productName) == false) {
                             System.out.println("This product does not exist, please enter a valid product: ");
-                            productName = scannerObj.nextLine();
+                            productName = scannerObj.nextLine().trim();
                         }
                         System.out.println("Please enter the the number of the value you would like to overwrite it with: ");
                         int updateValue = scannerObj.nextInt();
@@ -52,10 +51,10 @@ public class UpdateStock {
                     case "3":
                         System.out.println("Delete entry");
                         System.out.println("Please enter the item you would like to delete from the database: ");
-                        String userItemToDel = scannerObj.nextLine();
+                        String userItemToDel = scannerObj.nextLine().trim();
                         while (checkItemExists(userItemToDel) == false) {
                             System.out.println("This product does not exist, please enter a valid product: ");
-                            userItemToDel = scannerObj.nextLine();
+                            userItemToDel = scannerObj.nextLine().trim();
                         }
                         deleteStockEntry(userItemToDel);
                         break;
@@ -99,15 +98,15 @@ public class UpdateStock {
             Scanner scannerObj = new Scanner(System.in);
             Stock newStock = new Stock();
             System.out.println("Please enter the the name of the product: ");
-            String userStockName = scannerObj.nextLine();
+            String userStockName = scannerObj.nextLine().toLowerCase().trim();
             while (checkItemExists(userStockName) == true) {
                 System.out.println("This product already exists, please enter a new product: ");
-                userStockName = scannerObj.nextLine();
+                userStockName = scannerObj.nextLine().toLowerCase().trim();
             }
             System.out.println("Please enter the the category of the product: ");
-            String userStockCategory = scannerObj.nextLine();
+            String userStockCategory = scannerObj.nextLine().toLowerCase().trim();
             System.out.println("Is the product perishable: ");
-            String userStockPerishable = scannerObj.nextLine();
+            String userStockPerishable = scannerObj.nextLine().toLowerCase().trim();
             boolean userStockPerishableBool = stringToBool(userStockPerishable);
             System.out.println("What is the cost of the product: ");
             int userStockCost = scannerObj.nextInt();
@@ -131,7 +130,7 @@ public class UpdateStock {
             if (userStockCost > userStockSellPrice) {
                 System.out.println("The cost is higher than the sell price, are you sure you wish to add this item?");
                 System.out.println("Y = add to the database anyway, N = dont add to the database");
-                String addToDatabase = scannerObj.nextLine();
+                String addToDatabase = scannerObj.nextLine().toUpperCase().trim();
                 addToDatabaseBool = stringToBool(addToDatabase);
             }
             if (addToDatabaseBool == true) {
@@ -150,7 +149,7 @@ public class UpdateStock {
 
                 System.out.println("Would you like to add another product to the database?");
                 System.out.println("Y = yes, N = no");
-                String addNewItem = scannerObj.nextLine();
+                String addNewItem = scannerObj.nextLine().toUpperCase().trim();
                 addNewItemBool = stringToBool(addNewItem);
             }
         }
@@ -184,6 +183,11 @@ public class UpdateStock {
         session.close();
     }
 
+    /**
+     * This method checks if an item already exists in the database.
+     * @param itemToCheck This is the name of the item we are checking.
+     * @return The method returns a boolean value; true = the item exists, false = the item does not exist.
+     */
     public boolean checkItemExists(String itemToCheck) {
         boolean doesExist = true;
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -197,8 +201,13 @@ public class UpdateStock {
         return doesExist;
     }
 
+    /**
+     * This method converts the string Y or N to a boolean value.
+     * @param stringToConvert This is the string to be converted.
+     * @return If the string is "Y" the method returns true else if is "N" the false is returned.
+     */
     public boolean stringToBool(String stringToConvert) {
-        stringToConvert.toUpperCase().trim();
+        stringToConvert = stringToConvert.toUpperCase().trim();
         Scanner scannerObj = new Scanner(System.in);
         boolean convertedString = false;
         while(!((stringToConvert.equals("Y")) || (stringToConvert.equals("N")))) {
