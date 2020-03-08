@@ -98,7 +98,7 @@ public class UpdateStock {
      */
     public void createNewStockEntry() {
         boolean addNewItemBool = true;
-//        Will add entries to the database to the DB until the user is finished
+//        Will add entries to the database to the DB until the user is finished.
         while (addNewItemBool == true) {
             Scanner scannerObj = new Scanner(System.in);
             Stock newStock = new Stock();
@@ -116,11 +116,11 @@ public class UpdateStock {
             String userStockPerishable = scannerObj.nextLine();
             boolean userStockPerishableBool = stringToBool(userStockPerishable);
             System.out.println("What is the cost of the product: ");
-            int userStockCost = scannerObj.nextInt();
+            double userStockCost = scannerObj.nextDouble();
 //            Validates the user enters a valid cost.
             while (userStockCost < 0) {
                 System.out.println("Invalid input, please enter a cost equal to or higher than 0: ");
-                userStockCost = scannerObj.nextInt();
+                userStockCost = scannerObj.nextDouble();
             }
             System.out.println("What is the stock of the product: ");
             int userStockNum = scannerObj.nextInt();
@@ -130,11 +130,11 @@ public class UpdateStock {
                 userStockNum = scannerObj.nextInt();
             }
             System.out.println("What is the sell price of the product: ");
-            int userStockSellPrice = scannerObj.nextInt();
+            double userStockSellPrice = scannerObj.nextDouble();
 //            Validates the user enters a valid sell price.
             while (userStockSellPrice < 0) {
                 System.out.println("Invalid input, please enter a sell price equal to or higher than 0: ");
-                userStockSellPrice = scannerObj.nextInt();
+                userStockSellPrice = scannerObj.nextDouble();
             }
             boolean addToDatabaseBool = true;
 //            Warns the user if the cost is higher than the sell price
@@ -144,7 +144,7 @@ public class UpdateStock {
                 String addToDatabase = scannerObj.nextLine().toUpperCase().trim();
                 addToDatabaseBool = stringToBool(addToDatabase);
             }
-//            Adds the entry to the database
+//            Adds the entry to the database.
             if (addToDatabaseBool == true) {
                 newStock.setStockName(userStockName);
                 newStock.setcategory(userStockCategory);
@@ -186,7 +186,7 @@ public class UpdateStock {
             stockIdToDel = tmp.getId();
         }
         session.close();
-//        Uses stockID to delete the item from te DB
+//        Uses stockID to delete the item from te DB.
         Stock stockToDel;
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
