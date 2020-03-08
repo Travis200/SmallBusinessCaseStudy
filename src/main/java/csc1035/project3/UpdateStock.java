@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UpdateStock {
+//    This creates an object of the class.
     public static UpdateStock updateStockObj = new UpdateStock();
     /**
      * Runs command line style user interface where the user chooses how they would like to update the database.
@@ -22,11 +23,14 @@ public class UpdateStock {
             System.out.println("Option 3: Delete entry");
             System.out.println("Option 4: Exit");
             System.out.println("Please input option 1, 2, 3 or 4");
+//            This creates a scanner object which is used for the user input.
             Scanner scannerObj = new Scanner(System.in);
             String userChoice = scannerObj.nextLine().trim();
+//            This validates the user input is a valid option.
             if (!((userChoice.equals("1")) || (userChoice.equals("2")) || (userChoice.equals("3")) || (userChoice.equals("4")))) {
                 System.out.println("Incorrect input: Please Input 1, 2, 3 or 4");
             } else {
+//                Depending on the user choice each case will run a different method.
                 switch (userChoice) {
                     case "1":
                         System.out.println("Overwrite existing stock number");
@@ -99,6 +103,7 @@ public class UpdateStock {
             Stock newStock = new Stock();
             System.out.println("Please enter the the name of the product: ");
             String userStockName = scannerObj.nextLine().toLowerCase().trim();
+//            Validates that the item name does not already exist in the DB.
             while (checkItemExists(userStockName) == true) {
                 System.out.println("This product already exists, please enter a new product: ");
                 userStockName = scannerObj.nextLine().toLowerCase().trim();
@@ -110,29 +115,34 @@ public class UpdateStock {
             boolean userStockPerishableBool = stringToBool(userStockPerishable);
             System.out.println("What is the cost of the product: ");
             int userStockCost = scannerObj.nextInt();
+//            Validates the user enters a valid cost.
             while (userStockCost < 0) {
                 System.out.println("Invalid input, please enter a cost equal to or higher than 0: ");
                 userStockCost = scannerObj.nextInt();
             }
             System.out.println("What is the stock of the product: ");
             int userStockNum = scannerObj.nextInt();
+//            Validates the user enters a valid stock number.
             while (userStockNum < 0) {
                 System.out.println("Invalid input, please enter a stock number equal to or higher than 0: ");
                 userStockNum = scannerObj.nextInt();
             }
             System.out.println("What is the sell price of the product: ");
             int userStockSellPrice = scannerObj.nextInt();
+//            Validates the user enters a valid sell price.
             while (userStockSellPrice < 0) {
                 System.out.println("Invalid input, please enter a sell price equal to or higher than 0: ");
                 userStockSellPrice = scannerObj.nextInt();
             }
             boolean addToDatabaseBool = true;
+//            Warns the user if the cost is higher than the sell price
             if (userStockCost > userStockSellPrice) {
                 System.out.println("The cost is higher than the sell price, are you sure you wish to add this item?");
                 System.out.println("Y = add to the database anyway, N = dont add to the database");
                 String addToDatabase = scannerObj.nextLine().toUpperCase().trim();
                 addToDatabaseBool = stringToBool(addToDatabase);
             }
+//            Adds the entry to the database
             if (addToDatabaseBool == true) {
                 newStock.setStockName(userStockName);
                 newStock.setcategory(userStockCategory);
@@ -162,6 +172,7 @@ public class UpdateStock {
      */
     public void deleteStockEntry(String productName) {
         Session session = HibernateUtil.getSessionFactory().openSession();
+//        Finds the stockID associated with the item
         session.beginTransaction();
         Query q = session.createQuery("select o from Stock o where stockName =:value");
         q.setParameter("value", productName);
@@ -170,10 +181,9 @@ public class UpdateStock {
         for (Object i : q.getResultList()) {
             Stock tmp = (Stock) i;
             stockIdToDel = tmp.getId();
-            System.out.println(stockIdToDel);
         }
-
         session.close();
+//        Uses stockID to delete the item from te DB
         Stock stockToDel;
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
