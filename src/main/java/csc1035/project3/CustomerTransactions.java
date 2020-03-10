@@ -23,31 +23,31 @@ public static void transaction() {
     Scanner scanner = new Scanner(System.in);
     String item = "";
     int quantity = 1;
-    List<String> itemNames = new ArrayList<>();
-    List<Double> itemPrices = new ArrayList<>();
+    List<String> itemNames = new ArrayList<>();//A list of items to pass to the receipt
+    List<Double> itemPrices = new ArrayList<>();//A list of prices to pass to the receipt
     do {
         System.out.println("What item would you like to add to the transaction followed by the quantity with a space in between");
         System.out.println("or type false to end it");
         String input1 = scanner.nextLine();
-        Scanner scanner2 = new Scanner(input1).useDelimiter("\\s");
-        if (scanner2.hasNext()){
+        Scanner scanner2 = new Scanner(input1).useDelimiter("\\s");//splits the scanner item by the space between them
+        if (scanner2.hasNext()){//checks if scanner has a next item to use
             item = (scanner2.next());
             if (item.matches("false")){
                 break;
             }
-            if (scanner2.hasNext()){
+            if (scanner2.hasNext()){//checks if scanner has a next item to use
                 quantity = (scanner2.nextInt());}
             scanner2.close();}
 
 
         try {
-            for (int i = 0; i < quantity; i++) {
+            for (int i = 0; i < quantity; i++) {//loops to add an item to the transaction based on the quantity
                 session = HibernateUtil.getSessionFactory().openSession();
                 session.beginTransaction();
                 Query q = session.createQuery("select o from Stock o where stockName =:value");
-                q.setParameter("value", item);
+                q.setParameter("value", item);//sets the query to select the item to be added to the transaction
                 session.getTransaction().commit();
-                if (q.getResultList().size()==0){
+                if (q.getResultList().size()==0){//If no values returned the item is not in the database
                     System.out.println("Item does not exist");
                     break;
                 }
@@ -56,11 +56,11 @@ public static void transaction() {
                     session.beginTransaction();
                     Stock tmp = (Stock) j;
 
-                    if (tmp.getStock() <= 0) {
+                    if (tmp.getStock() <= 0) {//if the stock is 0 or less its out of stock and cannot be bought
                         System.out.println();
                         System.out.println("Out of Stock : " + tmp.getStockName());
                         break;
-                    } else if(tmp.getStock()>0) {
+                    } else if(tmp.getStock()>0) {//if the stock is above 0 its added to the transaction
                         tmp.setStock(tmp.getStock() - 1);
                         session.update(tmp);
                         session.getTransaction().commit();
