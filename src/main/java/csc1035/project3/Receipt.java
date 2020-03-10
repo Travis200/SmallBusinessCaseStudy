@@ -32,7 +32,7 @@ public class Receipt {
         Double amountPaid = 0.0;
         do {
             Scanner input = new Scanner(System.in);
-            System.out.print("Please enter how much the costumer paid ");
+            System.out.print("Please enter how much the customer has paid ");
             System.out.println("(Please ensure its more than or equal to " + total + "): ");
             if (input.hasNextDouble()){
                 amountPaid = input.nextDouble();}
