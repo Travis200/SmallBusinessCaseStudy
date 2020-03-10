@@ -35,7 +35,7 @@ public static void transaction() {
             if (item.matches("false")){
                 break;
             }
-            if (scanner2.hasNext()){//checks if scanner has a next item to use
+            if (scanner2.hasNextInt()){//checks if scanner has a next integer to use
                 quantity = (scanner2.nextInt());}
             scanner2.close();}
 
