@@ -5,7 +5,7 @@ import java.util.*;
 public class StockCount {
     /**This shows the list of what the datebase includes and the price of each of them.*/
     public static void count() {
-       System.out.println("The stock count is shown below:");
+        System.out.println("The stock count is shown below:");
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
         try {
