@@ -232,4 +232,12 @@ public class UpdateStock {
         }
         return convertedString;
     }
+
+
+    public boolean runAgain() {
+        System.out.println("Would you like to run again?");
+        Scanner scannerObj = new Scanner(System.in);
+        String runMethodAgain = scannerObj.nextLine();
+        return stringToBool(runMethodAgain);
+    }
 }
