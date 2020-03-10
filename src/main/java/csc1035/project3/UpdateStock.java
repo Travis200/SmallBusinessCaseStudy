@@ -81,20 +81,21 @@ public class UpdateStock {
     }
 
     /**
-     * This updates the stock value of an item in the database.
-     *
-     * @param productName This is the name of the product which stock value will be changed
-     * @param updateValue This is the value which will be used to overwrite the current stock value.
+     * Updates the stock value of an item in the database.
+     * @param productName Name of the product which stock value will be changed
+     * @param updateValue Value which will be used to overwrite the current stock value.
      */
     public void updateStockValue(String productName, int updateValue) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
+//        Makes a select query.
         Query q = session.createQuery("select o from Stock o where stockName =:value");
+//        Sets the "value" equal to the productName.
         q.setParameter("value", productName);
         session.getTransaction().commit();
         for (Object i : q.getResultList()) {
             Stock tmp = (Stock) i;
-            System.out.println(tmp.getStock());
+//            This updates the database with the new value
             tmp.setStock(updateValue);
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -105,10 +106,9 @@ public class UpdateStock {
     }
 
     /**
-     * This creates a item in the database based on what the user inputs.
+     * Creates a item in the database based on what the user inputs.
      */
     public void createNewStockEntry() {
-        boolean addNewItemBool = true;
 //        Will add entries to the database to the DB.
         Scanner scannerObj = new Scanner(System.in);
         Stock newStock = new Stock();
@@ -147,7 +147,7 @@ public class UpdateStock {
             userStockSellPrice = scannerObj.nextDouble();
         }
         boolean addToDatabaseBool = true;
-//            Warns the user if the cost is higher than the sell price
+//            Warns the user if the cost is higher than the sell price.
         if (userStockCost > userStockSellPrice) {
             System.out.println("The cost is higher than the sell price, are you sure you wish to add this item?");
             System.out.println("Y = add to the database anyway, N = dont add to the database");
@@ -173,8 +173,7 @@ public class UpdateStock {
 
 
     /**
-     * This deletes an item from the database using the product name.
-     *
+     * Deletes an item from the database using the product name.
      * @param productName The name of the product that will be deleted.
      */
     public void deleteStockEntry(String productName) {
@@ -201,9 +200,9 @@ public class UpdateStock {
     }
 
     /**
-     * This method checks if an item already exists in the database.
-     * @param itemToCheck This is the name of the item we are checking.
-     * @return The method returns a boolean value; true = the item exists, false = the item does not exist.
+     * Checks if an item already exists in the database.
+     * @param itemToCheck The name of the item we are checking.
+     * @return Boolean value (true = the item exists, false = the item does not exist).
      */
     public boolean checkItemExists(String itemToCheck) {
         boolean doesExist = true;
@@ -220,7 +219,7 @@ public class UpdateStock {
 
     /**
      * This method converts the string Y or N to a boolean value.
-     * @param stringToConvert This is the string to be converted.
+     * @param stringToConvert The string to be converted.
      * @return If the string is "Y" the method returns true else if is "N" the false is returned.
      */
     public boolean stringToBool(String stringToConvert) {
@@ -237,7 +236,10 @@ public class UpdateStock {
         return convertedString;
     }
 
-
+    /**
+     * Creates a user input where the user can choose whether to run a method again.
+     * @return Boolean value (true = run again, false = do not run again).
+     */
     public boolean runAgain() {
         System.out.println("Would you like to run this option again?");
         System.out.println("Y = yes, N = no");
