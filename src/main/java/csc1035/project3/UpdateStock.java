@@ -30,37 +30,48 @@ public class UpdateStock {
             if (!((userChoice.equals("1")) || (userChoice.equals("2")) || (userChoice.equals("3")) || (userChoice.equals("4")))) {
                 System.out.println("Incorrect input: Please Input 1, 2, 3 or 4");
             } else {
+                boolean runMethod = true;
 //                Depending on the user choice each case will run a different method.
                 switch (userChoice) {
                     case "1":
-                        System.out.println("Overwrite existing stock number");
-                        System.out.println("Please enter the the name of the product you would like to update: ");
-                        String productName = scannerObj.nextLine().trim();
-                        while (checkItemExists(productName) == false) {
-                            System.out.println("This product does not exist, please enter a valid product: ");
-                            productName = scannerObj.nextLine().trim();
+                        while (runMethod == true) {
+                            Scanner scannerObj2 = new Scanner(System.in);
+                            System.out.println("Overwrite existing stock number");
+                            System.out.println("Please enter the the name of the product you would like to update: ");
+                            String productName = scannerObj2.nextLine().trim();
+                            while (checkItemExists(productName) == false) {
+                                System.out.println("This product does not exist, please enter a valid product: ");
+                                productName = scannerObj2.nextLine().trim();
+                            }
+                            System.out.println("Please enter the the number of the value you would like to overwrite it with: ");
+                            int updateValue = scannerObj.nextInt();
+                            while (updateValue < 0) {
+                                System.out.println("Invalid input, please enter a stock number equal to or higher than 0: ");
+                                updateValue = scannerObj.nextInt();
+                            }
+                            updateStockValue(productName, updateValue);
+                            runMethod = runAgain();
                         }
-                        System.out.println("Please enter the the number of the value you would like to overwrite it with: ");
-                        int updateValue = scannerObj.nextInt();
-                        while (updateValue < 0) {
-                            System.out.println("Invalid input, please enter a stock number equal to or higher than 0: ");
-                            updateValue = scannerObj.nextInt();
-                        }
-                        updateStockValue(productName, updateValue);
                         break;
                     case "2":
-                        System.out.println("Add new entry");
-                        createNewStockEntry();
+                        while (runMethod == true) {
+                            System.out.println("Add new entry");
+                            createNewStockEntry();
+                            runMethod = runAgain();
+                        }
                         break;
                     case "3":
-                        System.out.println("Delete entry");
-                        System.out.println("Please enter the item you would like to delete from the database: ");
-                        String userItemToDel = scannerObj.nextLine().trim();
-                        while (checkItemExists(userItemToDel) == false) {
-                            System.out.println("This product does not exist, please enter a valid product: ");
-                            userItemToDel = scannerObj.nextLine().trim();
+                        while (runMethod == true) {
+                            System.out.println("Delete entry");
+                            System.out.println("Please enter the item you would like to delete from the database: ");
+                            String userItemToDel = scannerObj.nextLine().trim();
+                            while (checkItemExists(userItemToDel) == false) {
+                                System.out.println("This product does not exist, please enter a valid product: ");
+                                userItemToDel = scannerObj.nextLine().trim();
+                            }
+                            deleteStockEntry(userItemToDel);
+                            runMethod = runAgain();
                         }
-                        deleteStockEntry(userItemToDel);
                         break;
                     case "4":
                         valid = false;
@@ -98,75 +109,68 @@ public class UpdateStock {
      */
     public void createNewStockEntry() {
         boolean addNewItemBool = true;
-//        Will add entries to the database to the DB until the user is finished.
-        while (addNewItemBool == true) {
-            Scanner scannerObj = new Scanner(System.in);
-            Stock newStock = new Stock();
-            System.out.println("Please enter the the name of the product: ");
-            String userStockName = scannerObj.nextLine().toLowerCase().trim();
+//        Will add entries to the database to the DB.
+        Scanner scannerObj = new Scanner(System.in);
+        Stock newStock = new Stock();
+        System.out.println("Please enter the the name of the product: ");
+        String userStockName = scannerObj.nextLine().toLowerCase().trim();
 //            Validates that the item name does not already exist in the DB.
-            while (checkItemExists(userStockName) == true) {
-                System.out.println("This product already exists, please enter a new product: ");
-                userStockName = scannerObj.nextLine().toLowerCase().trim();
-            }
-            System.out.println("Please enter the the category of the product: ");
-            String userStockCategory = scannerObj.nextLine().toLowerCase().trim();
-            System.out.println("Is the product perishable: ");
-            System.out.println("Y = yes, N = no");
-            String userStockPerishable = scannerObj.nextLine();
-            boolean userStockPerishableBool = stringToBool(userStockPerishable);
-            System.out.println("What is the cost of the product: ");
-            double userStockCost = scannerObj.nextDouble();
+        while (checkItemExists(userStockName) == true) {
+            System.out.println("This product already exists, please enter a new product: ");
+            userStockName = scannerObj.nextLine().toLowerCase().trim();
+        }
+        System.out.println("Please enter the the category of the product: ");
+        String userStockCategory = scannerObj.nextLine().toLowerCase().trim();
+        System.out.println("Is the product perishable: ");
+        System.out.println("Y = yes, N = no");
+        String userStockPerishable = scannerObj.nextLine();
+        boolean userStockPerishableBool = stringToBool(userStockPerishable);
+        System.out.println("What is the cost of the product: ");
+        double userStockCost = scannerObj.nextDouble();
 //            Validates the user enters a valid cost.
-            while (userStockCost < 0) {
-                System.out.println("Invalid input, please enter a cost equal to or higher than 0: ");
-                userStockCost = scannerObj.nextDouble();
-            }
-            System.out.println("What is the stock of the product: ");
-            int userStockNum = scannerObj.nextInt();
+        while (userStockCost < 0) {
+            System.out.println("Invalid input, please enter a cost equal to or higher than 0: ");
+            userStockCost = scannerObj.nextDouble();
+        }
+        System.out.println("What is the stock of the product: ");
+        int userStockNum = scannerObj.nextInt();
 //            Validates the user enters a valid stock number.
-            while (userStockNum < 0) {
-                System.out.println("Invalid input, please enter a stock number equal to or higher than 0: ");
-                userStockNum = scannerObj.nextInt();
-            }
-            System.out.println("What is the sell price of the product: ");
-            double userStockSellPrice = scannerObj.nextDouble();
+        while (userStockNum < 0) {
+            System.out.println("Invalid input, please enter a stock number equal to or higher than 0: ");
+            userStockNum = scannerObj.nextInt();
+        }
+        System.out.println("What is the sell price of the product: ");
+        double userStockSellPrice = scannerObj.nextDouble();
 //            Validates the user enters a valid sell price.
-            while (userStockSellPrice < 0) {
-                System.out.println("Invalid input, please enter a sell price equal to or higher than 0: ");
-                userStockSellPrice = scannerObj.nextDouble();
-            }
-            boolean addToDatabaseBool = true;
+        while (userStockSellPrice < 0) {
+            System.out.println("Invalid input, please enter a sell price equal to or higher than 0: ");
+            userStockSellPrice = scannerObj.nextDouble();
+        }
+        boolean addToDatabaseBool = true;
 //            Warns the user if the cost is higher than the sell price
-            if (userStockCost > userStockSellPrice) {
-                System.out.println("The cost is higher than the sell price, are you sure you wish to add this item?");
-                System.out.println("Y = add to the database anyway, N = dont add to the database");
-                String addToDatabase = scannerObj.nextLine().toUpperCase().trim();
-                addToDatabaseBool = stringToBool(addToDatabase);
-            }
+        if (userStockCost > userStockSellPrice) {
+            System.out.println("The cost is higher than the sell price, are you sure you wish to add this item?");
+            System.out.println("Y = add to the database anyway, N = dont add to the database");
+            String addToDatabase = scannerObj.nextLine().toUpperCase().trim();
+            addToDatabaseBool = stringToBool(addToDatabase);
+        }
 //            Adds the entry to the database.
-            if (addToDatabaseBool == true) {
-                newStock.setStockName(userStockName);
-                newStock.setcategory(userStockCategory);
-                newStock.setperishable(userStockPerishableBool);
-                newStock.setCost(userStockCost);
-                newStock.setStock(userStockNum);
-                newStock.setSellPrice(userStockSellPrice);
+        if (addToDatabaseBool == true) {
+            newStock.setStockName(userStockName);
+            newStock.setcategory(userStockCategory);
+            newStock.setperishable(userStockPerishableBool);
+            newStock.setCost(userStockCost);
+            newStock.setStock(userStockNum);
+            newStock.setSellPrice(userStockSellPrice);
 
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                session.beginTransaction();
-                session.save(newStock);
-                session.getTransaction().commit();
-                session.close();
-//                Asks if the user wants to add another entry and changes the value of addNewIteBool accordingly.
-                Scanner scannerObj2 = new Scanner(System.in);
-                System.out.println("Would you like to add another product to the database?");
-                System.out.println("Y = yes, N = no");
-                String addNewItem = scannerObj2.nextLine();
-                addNewItemBool = stringToBool(addNewItem);
-            }
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(newStock);
+            session.getTransaction().commit();
+            session.close();
         }
     }
+
 
     /**
      * This deletes an item from the database using the product name.
@@ -235,7 +239,8 @@ public class UpdateStock {
 
 
     public boolean runAgain() {
-        System.out.println("Would you like to run again?");
+        System.out.println("Would you like to run this option again?");
+        System.out.println("Y = yes, N = no");
         Scanner scannerObj = new Scanner(System.in);
         String runMethodAgain = scannerObj.nextLine();
         return stringToBool(runMethodAgain);

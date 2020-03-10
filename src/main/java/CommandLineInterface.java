@@ -24,6 +24,7 @@ public class CommandLineInterface {
                 System.out.println("Incorrect input: Please Input 1, 2, 3 or 4");
             }
             else { switch (userChoice1) {
+
                     case "1":
                         System.out.println("Stock count:");
                         StockCount.count();
