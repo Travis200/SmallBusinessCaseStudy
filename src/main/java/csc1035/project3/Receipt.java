@@ -18,7 +18,7 @@ public class Receipt {
     public static void AsciiTable(List<String> itemNames, List<Double> itemPrices) {
 
         //Looping through the transaction to find the total cost of the purchase.
-        int total = 0;
+        double total = 0.0;
 
         for (int i = 0; i < itemPrices.size(); i++) {
             total += itemPrices.get(i);
@@ -80,7 +80,7 @@ public class Receipt {
             System.out.format("|                                            |%n");
             System.out.format(leftAlignFormatAmountPaid, amountPaid);
             System.out.format("|                                            |%n");
-            System.out.format(leftAlignFormatChangeOwed, change);
+            System.out.format(leftAlignFormatChangeOwed, String.format("%.2f", change));
             System.out.format("|                                            |%n");
             System.out.format("+--------------------------------------------+%n");
 

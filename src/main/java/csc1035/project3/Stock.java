@@ -28,7 +28,16 @@ public class Stock {
     @Column
     private double sellPrice;
 
-
+    /**
+     * This is a method
+     * @param id
+     * @param stockName
+     * @param category
+     * @param perishable
+     * @param cost
+     * @param stock
+     * @param sellPrice
+     */
     public Stock(int id, String stockName, String category, Boolean perishable, double cost, int stock, double sellPrice) {
         this.id = id;
         this.stockName = stockName;
