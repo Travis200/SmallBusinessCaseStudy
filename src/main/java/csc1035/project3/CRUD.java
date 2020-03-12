@@ -19,6 +19,10 @@ import java.util.*;
             session.getTransaction().commit();
             session.close();
         }
+
+        /**
+         * This allows you to read values from the database
+         */
         public static void read(){
             Session session = HibernateUtil.getSessionFactory().openSession();
             try {
@@ -44,6 +48,11 @@ import java.util.*;
                 session.close();
             }
         }
+
+        /**
+         * Allows you to update a value based on its Id
+         * @param id
+         */
         public static void update(int id){
             Session session = HibernateUtil.getSessionFactory().openSession();
             try {
@@ -60,6 +69,11 @@ import java.util.*;
                 session.close();
             }
         }
+
+        /**
+         * Allows you to delete a database entry based on ts Id
+         * @param id
+         */
         public static void delete(int id){
             Session session = HibernateUtil.getSessionFactory().openSession();
             try {
